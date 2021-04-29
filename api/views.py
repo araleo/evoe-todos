@@ -12,10 +12,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from .permissions import IsOwnerOrReadOnly
 from .permissions import IsOwnerOnly
 from .serializers import ToDoSerializer
-from .serializers import UserSerializer
 from todo.models import ToDo
 
 
@@ -23,7 +21,6 @@ from todo.models import ToDo
 @permission_classes((permissions.AllowAny,))
 def api_root(request, format=None):
     return Response({
-        'users': reverse('api:user-list', request=request, format=format),
         'todos': reverse('api:todo-list', request=request, format=format)
     })
 
@@ -41,26 +38,17 @@ class ToDoViewSet(viewsets.ModelViewSet):
         return _queryset
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
 class ToDoDetail(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOnly]
 
     def get_object(self, pk):
         try:
-            return ToDo.objects.get(pk=pk)
+            obj = ToDo.objects.get(pk=pk)
         except ToDo.DoesNotExist:
             raise Http404
+        else:
+            self.check_object_permissions(self.request, obj)
+            return obj
 
     def get(self, request, pk, format=None):
         todo = self.get_object(pk)
