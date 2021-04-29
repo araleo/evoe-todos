@@ -1,0 +1,27 @@
+{% extends 'todo/layout.html' %}
+
+{% block content %}
+    <h1>{{ user.username }}'s ToDo List</h1>
+    
+    <div class="create-todo">
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <ul>
+                {{ new_todo_form.as_ul }}
+            </ul>
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+
+    {% if latest_todos_list %}
+    <ul>
+        {% for todo in latest_todos_list %}
+            <li><a href="{% url 'todo:detail' todo.id %}">{{ todo.todo }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No todos available</p>
+    {% endif %}
+{% endblock %}
