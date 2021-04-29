@@ -2,10 +2,13 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
@@ -27,8 +30,10 @@ def api_root(request, format=None):
 
 class ToDoViewSet(viewsets.ModelViewSet):
     queryset = ToDo.objects.all().order_by('-created_at')
+    
     serializer_class = ToDoSerializer
     permission_classes = [IsOwnerOnly]
+    authentication_classes = [TokenAuthentication]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -40,15 +45,12 @@ class ToDoViewSet(viewsets.ModelViewSet):
 
 class ToDoDetail(APIView):
     permission_classes = [IsOwnerOnly]
+    authentication_classes = [BasicAuthentication, TokenAuthentication]
 
     def get_object(self, pk):
-        try:
-            obj = ToDo.objects.get(pk=pk)
-        except ToDo.DoesNotExist:
-            raise Http404
-        else:
-            self.check_object_permissions(self.request, obj)
-            return obj
+        obj = get_object_or_404(ToDo, pk=pk)
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def get(self, request, pk, format=None):
         todo = self.get_object(pk)
