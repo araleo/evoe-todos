@@ -1,0 +1,54 @@
+<!-- inicio lista de todos -->
+<div class="list-todos">
+    <ul>
+
+    {% for todo in todos %}
+    <!-- cor do fundo de cada todo -->
+    <div class="each-todo" id="{{ todo.id }}">
+
+        <div class="upper-todo-div">
+            <!-- botao excluir todo -->
+            <form class="" action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
+                <button type="submit" name="botaoexcluir" id="botao-excluir-{{ todo.id }}">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </form>
+
+            <!-- dados todo inicio -->
+            {% if todo.important %} <b> {% endif %}
+            <li>{{ todo.todo }}</li>
+            {% if todo.important %} </b> {% endif %}
+
+        </div>
+
+        {% if todo.description %}
+        <div class="lower-todo-div">
+            <li>{{ todo.description }}</li>
+        </div>
+        {% endif %}
+        <!-- dados todo fim -->
+
+    </div>
+    {% endfor %}
+
+    </ul>
+</div>
+<!-- fim lista de todos -->
+
+
+
+
+<!-- Início div lista todos -->
+{% if latest_todos_list %}
+<ul>
+    {% for todo in latest_todos_list %}
+        <li><a href="{% url 'todo:detail' todo.id %}">{{ todo.todo }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No todos available</p>
+{% endif %}
+
+<!-- Fim div lista todos -->

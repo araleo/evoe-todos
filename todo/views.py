@@ -24,8 +24,8 @@ def home(request):
 
     latest_todos_list = ToDo.objects.order_by('-created_at')[:5]
     context = {
-        'new_todo_form': ToDoForm(),
-        'latest_todos_list': latest_todos_list
+        'form': ToDoForm(),
+        'todos': latest_todos_list
     }
     return render(request, 'todo/index.html', context)
 

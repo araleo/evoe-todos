@@ -5,6 +5,55 @@
 	vertical-align: baseline;
 }
 
-li a {
-    color: green;
+h1 {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.create-todo {
+    width: 50%;
+    margin: 2em auto;
+    min-width: 500px;
+    max-width: 600px;
+}
+
+.create-todo div {
+    text-align: center;
+}
+
+.upper-form input {
+    margin: 0 .5em;
+}
+
+.upper-form input[type=text] {
+    width: 50%;
+}
+
+.lower-form input[type=text] {
+    margin-top: .5em;
+    width: 100%;
+}
+
+.list-todos {
+    margin-top: 3em;
+}
+
+.each-todo {
+    /* border: 1px solid black; */
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin: 1em auto;
+    padding: 5px;
+    width: 70%;
+    min-width: 400px;
+    max-width: 1000px;
+}
+
+.upper-todo-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lower-todo-div {
+    text-align: center;
 }
