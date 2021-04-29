@@ -9,12 +9,13 @@ urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
 
+    # accounts
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', register),
+
     # api
     path('api/', include('api.urls')),
-    path('api-auth/', include('rest_framework.urls')),
 
     # app
     path('todo/', include('todo.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('register/', register),
 ]

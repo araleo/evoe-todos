@@ -1,16 +1,14 @@
-<div class="create-todo">
-    <form action= "" method="post">
+<div class="todo-form">
+    <form action="" method="post">
         {% csrf_token %}
-            <div class="upper-form">
 
+        <div class="upper-form">
             {{ form.todo.errors }}
             {{ form.todo }}
-
             {{ form.important.errors }}
             <label for="{{ form.important.id_for_label }}">Importante</label>
             {{ form.important }}
-
-            <button type="submit" name="button" id="botao-save-todo">Salvar</button>
+            <button type="submit" name="btn-save-todo" id="btn-save-todo">Salvar</button>
         </div>
 
         <div class="lower-form">

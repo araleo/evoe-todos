@@ -1,16 +1,45 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVOE ToDo's</title>
-</head>
-<body>
-    
-    <h2>{{ todo.todo }}</h2>
-    <p>{{ todo.description }}</p>
-    <p>{{ todo.user }}</p>
+{% extends 'todo/layout.html' %}
+ 
+{% block content %}
 
-</body>
-</html>
+    <a href="{% url 'todo:index' %}">Home</a>
+
+    <div class="detail-content">
+
+        <!-- Detalhes -->
+        <div class="todo-detail">
+            <h2>{{ todo.todo }}</h2>
+            {% if todo.description %}<p>{{ todo.description }}</p>{% endif %}
+            <p>Importante: {{ todo.e_importante }}</p>
+            <p>Criação: {{ todo.created_at }}</p>
+            <p>Última edição: {{ todo.last_modified_at }}</p>
+            {% if todo.is_completed %}<p>Finalizada em: {{ todo.completed_at }}</p>{% endif %}
+        </div>
+
+        <!-- Botões -->
+        <div class="btns-detail">
+            <form class="" action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
+                <!-- Excluir -->
+                <button type="submit" name="btndelete" id="btn-delete-{{ todo.id }}">
+                    <i class="far fa-trash-alt"></i>Excluir
+                </button>
+                <!-- Editar -->
+                <button type="submit" name="btnedit" id="btn-edit-{{ todo.id }}">
+                    <i class="far fa-trash-alt"></i>Editar
+                </button>
+                <!-- Completar -->
+                <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">
+                    <i class="far fa-trash-alt"></i>Concluir
+                </button>
+            </form>
+        </div>
+
+        <!-- Início formulário editar todo -->
+        {% include 'todo/form.html' %}
+        <!-- Fim formulário novo todo -->
+
+    </div>
+
+{% endblock %}
