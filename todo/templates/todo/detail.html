@@ -23,17 +23,11 @@
                 {% csrf_token %}
                 <input type="hidden" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
                 <!-- Excluir -->
-                <button type="submit" name="btndelete" id="btn-delete-{{ todo.id }}">
-                    <i class="far fa-trash-alt"></i>Excluir
-                </button>
+                <button type="submit" name="btndelete" id="btn-delete-{{ todo.id }}">Excluir</button>
                 <!-- Editar -->
-                <button type="submit" name="btnedit" id="btn-edit-{{ todo.id }}">
-                    <i class="far fa-trash-alt"></i>Editar
-                </button>
-                <!-- Completar -->
-                <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">
-                    <i class="far fa-trash-alt"></i>Concluir
-                </button>
+                <button type="submit" name="btnedit" id="btn-edit-{{ todo.id }}">Editar</button>
+                <!-- Concluir -->
+                <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">Concluir</button>
             </form>
         </div>
 

@@ -5,14 +5,14 @@
     <ul>
         {% for todo in pending %}
         <a href="{% url 'todo:detail' todo.id %}">
-        <li>
-            {% include 'todo/todo.html' %}
-        </li>
+            <li>
+                {% include 'todo/todo.html' %}
+            </li>
         </a>
         {% endfor %}
     </ul>
     {% else %}
-        <p>Sem tarefas pendentes.</p>
+        <p class="no-tasks-p">Sem tarefas pendentes.</p>
     {% endif %}
 
     <h2>Concluídos</h2>
@@ -27,7 +27,7 @@
         {% endfor %}
     </ul>
     {% else %}
-        <p>Sem tarefas concluídas.</p>
+        <p class="no-tasks-p">Sem tarefas concluídas.</p>
     {% endif %}
 
 </div>

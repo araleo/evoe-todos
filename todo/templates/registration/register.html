@@ -1,7 +1,7 @@
 {% extends 'todo/layout.html' %}
 
 {% block content %}
-    <h1>Register</h1>
+    <h1>Cadastro</h1>
 
     <div class="register-form">
         <form class="" method="post">
@@ -9,7 +9,9 @@
             <table>
                 {{ form.as_table }}
             </table>
-            <button type="submit" name="button">Sign up</button>
+            <button type="submit" name="button">Cadastrar</button>
         </form>
+
+        <p>Ou clique <a href="{% url 'login' %}" id="register-login-link">aqui</a> para fazer login.</p>
     </div>
 {% endblock %}

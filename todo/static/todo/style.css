@@ -44,6 +44,17 @@ h1 {
     width: 100%;
 }
 
+.home-content .list-todos {
+    width: 70%;
+    min-width: 400px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.home-content .list-todos ul {
+    list-style-type: none;
+}
+
 .home-content .list-todos h2 {
     text-align: center;
     margin-top: 3em;
@@ -53,9 +64,9 @@ h1 {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     margin: 1em auto;
     padding: 5px;
-    width: 70%;
+    /* width: 70%;
     min-width: 400px;
-    max-width: 1000px;
+    max-width: 1000px; */
 }
 
 .home-content .list-todos .each-todo .upper-todo-div {
@@ -66,6 +77,11 @@ h1 {
 
 .home-content .list-todos .each-todo .lower-todo-div {
     text-align: center;
+}
+
+.home-content .no-tasks-p {
+    text-align: center;
+    margin-top: 1em;
 }
 
 
@@ -126,4 +142,34 @@ h1 {
 
 .register-form button {
     text-align: center;
+}
+
+.register-form p {
+    margin-top: 2em;
+}
+
+#register-login-link {
+    text-decoration: underline;
+    color: blue;
+}
+
+
+/* Login */
+
+.login-form {
+    width: 50%;
+    margin: 5em auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form form {
+    margin-top: 2em;
+}
+
+#login-register-link {
+    text-decoration: underline;
+    color: blue;
 }
