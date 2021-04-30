@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -39,13 +40,15 @@ class ToDoViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        _queryset = self.queryset.filter(user=self.request.user)
+        # filtra apenas os objetos criados pelo usuário que fez o request
+        # e que não tenham o campo deleted_at preenchido
+        _queryset = self.queryset.filter(user=self.request.user, deleted_at__isnull=True)
         return _queryset
 
 
 class ToDoDetail(APIView):
     permission_classes = [IsOwnerOnly]
-    authentication_classes = [BasicAuthentication, TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
 
     def get_object(self, pk):
         obj = get_object_or_404(ToDo, pk=pk)
@@ -67,5 +70,6 @@ class ToDoDetail(APIView):
 
     def delete(self, request, pk, format=None):
         todo = self.get_object(pk)
-        todo.delete()
+        todo.deleted_at = timezone.now()
+        todo.save()
         return Response(status=status.HTTP_204_NO_CONTENT)

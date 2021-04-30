@@ -44,3 +44,7 @@ def register(request):
 
     form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def docs(request):
+    return render(request, 'docs/readthedocs.html')

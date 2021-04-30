@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/docs_style.css' %}">
+    <title>Evoe ToDo List - Read the docs!</title>
+</head>
+<body>
+    
+    <h1>Olá! Bem vindo e obrigado por utilizar nossa ToDo List!</h1>
+    <p>
+        Essa documentação é o guia de uso da API. O código está disponível no 
+        <a href="https://github.com/araleo/evoe-todos" target="_blank" id="link-github">GitHub</a>
+    </p>
+    
+    
+    <!-- Registro -->
+    <h2>Registro</h2>
+    <p>
+        Para uso da API, primeiro é preciso criar uma conta 
+        na <a href="/register" target="_blank">página de cadastro</a>
+    </p>
+    
+    
+    <!-- Token -->
+    <h2>Token</h2>
+    <p>
+        Depois de criar um login e uma senha, é preciso gerar um token para acessar a API. 
+        Para isso, basta enviar um POST para http://127.0.0.1:8000/api/api-token-auth/ 
+        com  o usuário e a senha criados. A resposta conterá o token de acesso dessa conta.
+    </p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X POST -d "username=teste&password=teste" http://127.0.0.1:8000/api/api-token-auth/
+            </code>
+            <samp>
+                {"token":"bac692809c899a183af81031d38b8208da0d732a"}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> res = requests.post('http://127.0.0.1:8000/api/api-token-auth/', data={'username': 'teste', 'password': 'teste'})
+                >>> res.text
+            </code>
+            <samp>
+                '{"token":"bac692809c899a183af81031d38b8208da0d732a"}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- Endpoints -->
+    <h2>Endpoints</h2>
+    
+    <!-- Root -->
+    <h3>api/</h3>
+    <p>Requisições permitidas: GET</p>
+    <p>Ponto de acesso: http://127.0.0.1:8000/api/</p>
+    <p>Retorna as urls das endpoints da api.</p>
+    <p>Esse é o único endpoint que pode ser acessado sem um Token.</p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X GET http://127.0.0.1:8000/api/
+            </code>
+            <samp>
+                {"todos":"http://127.0.0.1:8000/api/todos/"}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> res = requests.get('http://127.0.0.1:8000/api/')
+                >>> res.text
+            </code>
+            <samp>
+                '{"todos":"http://127.0.0.1:8000/api/todos/"}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- Todos -->
+    <h3>api/todos/</h3>
+    <p>Requisições permitidas: GET e POST</p>
+    <p>Ponto de acesso: http://127.0.0.1:8000/api/todos/</p>
+    
+    
+    <!-- ToDos POST -->
+    <h4>POST</h4>
+    <p>
+        A requisição POST pode ser utilizada para cadastrar um novo ToDo.
+        Para a criação de um novo ToDo é necessário apenas o texto da tarefa.
+        Dados opcionais podem ser vistos na seção ToDo abaixo.
+    </p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X POST http://127.0.0.1:8000/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "teste"}'
+            </code>
+            <samp>
+                {"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> data = {'todo': 'teste6'}
+                >>> res = requests.post('http://127.0.0.1:8000/api/todos/', headers=headers, data=data)
+                >>> res.text
+            </code>
+            <samp>
+                '{"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- ToDos GET -->
+    <h4>GET</h4>
+    <p>Retorna uma lista com todos os ToDos cadastrados pelo usuário portador do token.</p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X GET http://127.0.0.1:8000/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+            </code>
+            <samp>
+                {"count":2,"next":null,"previous":null,"results":[{"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null},{"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}]}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers={'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> res = requests.get('http://127.0.0.1:8000/api/todos/', headers=headers)
+                >>> res.text
+            </code>
+            <samp>
+                '{"count":2,"next":null,"previous":null,"results":[{"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null},{"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}]}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- ToDo Detalhe -->
+    <h3>api/todos/(id)</h3>
+    <p>Requisições permitidas: GET, PUT, DELETE</p>
+    <p>Ponto de acesso: http://127.0.0.1:8000/api/todos/(to_id)</p>
+    
+    <!-- Detalhet GET -->
+    <h4>GET</h4>
+    <p>Retorna o ToDo com id requisitado</p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X GET http://127.0.0.1:8000/api/todos/43/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+            </code>
+            <samp>
+                {"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> res = requests.get('http://127.0.0.1:8000/api/todos/42/', headers=headers)
+                >>> res.text
+            </code>
+            <samp>
+                '{"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- Detalhet PUT -->
+    <h4>PUT</h4>
+    <p>Altera o ToDo com id requisitado</p>
+    <p>Os dados para alteração podem ser passados como json</p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X PUT http://127.0.0.1:8000/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "Teste"}'
+            </code>
+            <samp>
+                {"id":42,"todo":"Teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:28:07.757992-03:00","completed_at":null,"deleted_at":null}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> data = {'todo': 'Teste!'}
+                >>> res = requests.put('http://127.0.0.1:8000/api/todos/43/', headers=headers, data=data)
+                >>> res.text
+            </code>
+            <samp>
+                '{"id":43,"todo":"Teste!","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:29:30.980012-03:00","completed_at":null,"deleted_at":null}'
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- Detalhe DELETE -->
+    <h4>DELETE</h4>
+    <p>Apaga o ToDo com id requisitado</p>
+    <p>
+        Os ToDos não são efetivamente apagados do banco,
+        e sim é preenchido o seu campo deleted_at.
+        ToDos com o campo deleted_at diferente de null
+        não aparecem na lista geral (/api/todo/), mas 
+        podem ser acessados pelo endpoint de detalhe (/api/todo/id/)
+    </p>
+    <p>Em caso de sucesso, essa requisição retorna o código 204.</p>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X DELETE http://127.0.0.1:8000/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+            </code>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> res = requests.delete('http://127.0.0.1:8000/api/todos/43/', headers=headers)
+                >>> res.status_code
+            </code>
+            <samp>
+                204
+            </samp>
+        </pre>
+    </div>
+    
+    <!-- Permissões  -->
+    <h3>Permissões</h3>
+    <p>
+        Tentar acessar, alterar ou deletar um ToDo criado por um usuário que 
+        não seja o portador do Token resultará em uma resposta 403 com 
+        a mensagem: "Você não tem permissão para executar essa ação."
+    </p>
+    
+    <div class="code-snippet">
+        <p>Python</p>
+        <pre>
+            <code>
+                >>> import requests
+                >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
+                >>> res = requests.get('http://127.0.0.1:8000/api/todos/33/', headers=headers)
+                >>> print(res, res.text)
+            </code>
+            <samp>
+                403 {"detail":"Você não tem permissão para executar essa ação."}
+            </samp>
+        </pre>
+    </div>
+    
+    <div class="code-snippet">
+        <p>cURL</p>
+        <pre>
+            <code>
+                $ curl -X DELETE http://127.0.0.1:8000/api/todos/33/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+            </code>
+            <samp>
+                {"detail":"Você não tem permissão para executar essa ação."}
+            </samp>
+        </pre>
+    </div>
+    
+    
+    <!-- ToDo -->
+    <h2>ToDo</h2>
+    
+    <p>
+        O ToDo é o modelo da nossa API. Cada ToDo representa
+        uma tarefa na nossa lista de tarefas. Seus atributos são:
+    </p>
+    
+    <ul>
+        <li>
+            todo: tarefa a ser executada. Tipo texto. 
+            Limite de 100 caracteres. Campo obrigatório
+        </li>
+        <li>
+            description: descrição da tarefa a ser executada. Tipo texto. 
+            Limite de 300 caracteres. Pode ser nulo ou em branco
+        </li>
+        <li>
+            important: se a tarefa é importante ou não. Booleano.
+            Campo obrigatório com valor default = Falso.
+        </li>
+        <li>
+            user: usuário que cadastrou a tarefa.
+        </li>
+        <li>
+            created_at: data e hora de criação da tarefa.
+            Campo obrigatório de preenchimento automático.
+        </li>
+        <li>
+            last_modified_at: data e hora da ultima alteração
+            na tarefa. Campo obrigatório de preenchimento automático.
+        </li>
+        <li>
+            completed_at: data e hora de término da tarefa.
+        </li>
+        <li>
+            delete_at: data e hora de exclusão da tarefa.
+        </li>
+    </ul>
+
+</body>
+</html>
