@@ -14,6 +14,7 @@
             <p>Criação: {{ todo.created_at }}</p>
             <p>Última edição: {{ todo.last_modified_at }}</p>
             {% if todo.is_completed %}<p>Finalizada em: {{ todo.completed_at }}</p>{% endif %}
+            {% if todo.is_deleted %}<p>Deletada em: {{ todo.deleted_at }}</p>{% endif %}
         </div>
 
         <!-- Botões -->
