@@ -106,3 +106,24 @@ h1 {
 .detail-content .todo-form .lower-form input[type=text] {
     width: 90%;
 }
+
+
+/* Register */
+
+.register-form {
+    width: 50%;
+    margin: 3em auto;
+    text-align: left;
+}
+
+.register-form table {
+    width: 100%;
+}
+
+.register-form .helptext {
+    display: none;
+}
+
+.register-form button {
+    text-align: center;
+}

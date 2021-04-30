@@ -9,3 +9,7 @@ class ToDoForm(ModelForm):
     class Meta:
         model = ToDo
         fields = ['todo', 'description', 'important']
+        widgets = {
+            'todo': TextInput(attrs={'autofocus': 'autofocus', 'placeholder': 'Tarefa'}),
+            'description': TextInput(attrs={'placeholder': 'Descrição'}),
+        }

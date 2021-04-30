@@ -24,6 +24,7 @@ def home(request):
     return render(request, 'todo/index.html', context)
 
 
+@login_required
 def detail(request, todo_id):
     if request.method == 'POST':
         operate_todo(request, todo_id=todo_id, update=True)
@@ -41,7 +42,5 @@ def register(request):
             form.save()
         return HttpResponseRedirect('/todo')
 
-    if request.method == 'GET':
-        form = UserCreationForm()
-
+    form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

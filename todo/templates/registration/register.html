@@ -3,10 +3,12 @@
 {% block content %}
     <h1>Register</h1>
 
-    <div class="formulario">
+    <div class="register-form">
         <form class="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            <table>
+                {{ form.as_table }}
+            </table>
             <button type="submit" name="button">Sign up</button>
         </form>
     </div>

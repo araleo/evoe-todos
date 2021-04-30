@@ -20,7 +20,12 @@
         <form class="" action="" method="post">
             {% csrf_token %}
             <input type="hidden" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
-            <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">
+            <button 
+                type="submit" 
+                name="btncomplete" 
+                id="btn-complete-{{ todo.id }}" 
+                {% if todo.is_completed %} style="visibility: hidden;" {% endif %}
+            >
                 <i class="far fa-trash-alt"></i>Concluir
             </button>
         </form>
@@ -33,5 +38,5 @@
         <p>{{ todo.description }}</p>
     </div>
     {% endif %}
-    
+
 </div>
