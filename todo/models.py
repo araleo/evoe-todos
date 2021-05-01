@@ -25,4 +25,4 @@ class ToDo(models.Model):
 
     @property
     def e_importante(self):
-        return "Sim" if self.important else "Não"
+        return 'Sim' if self.important else 'Não'
