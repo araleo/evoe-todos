@@ -1,14 +1,8 @@
-from django.shortcuts import render
-
-from django.contrib.auth.models import User
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import status
-from rest_framework.authentication import BasicAuthentication
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
@@ -31,7 +25,7 @@ def api_root(request, format=None):
 
 class ToDoViewSet(viewsets.ModelViewSet):
     queryset = ToDo.objects.all().order_by('-created_at')
-    
+
     serializer_class = ToDoSerializer
     permission_classes = [IsOwnerOnly]
     authentication_classes = [TokenAuthentication]

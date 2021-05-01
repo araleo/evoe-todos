@@ -3,18 +3,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.utils import timezone
 
 from .forms import ToDoForm
 from .models import ToDo
 from .util import redirect_after_post
-from .util import operate_todo
+from .util import handle_todo
 
 
 @login_required
 def home(request):
     if request.method == 'POST':
-        operate_todo(request)
+        handle_todo(request)
         return redirect_after_post(request)
 
     todos = ToDo.objects.filter(user=request.user, deleted_at__isnull=True).order_by('-created_at')
@@ -27,8 +26,8 @@ def home(request):
 @login_required
 def detail(request, todo_id):
     if request.method == 'POST':
-        operate_todo(request, todo_id=todo_id, update=True)
-        return redirect_after_post(request, todo_id)        
+        handle_todo(request, todo_id=todo_id)
+        return redirect_after_post(request, todo_id)
 
     todo = get_object_or_404(ToDo, pk=todo_id, user=request.user, deleted_at__isnull=True)
     context = {'todo': todo, 'form': ToDoForm(instance=todo)}

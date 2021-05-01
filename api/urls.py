@@ -1,7 +1,5 @@
 from django.urls import include
 from django.urls import path
-from rest_framework import renderers
-from rest_framework import routers
 from rest_framework.authtoken import views as token_views
 from rest_framework.urlpatterns import format_suffix_patterns
 

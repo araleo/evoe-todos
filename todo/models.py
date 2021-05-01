@@ -26,6 +26,3 @@ class ToDo(models.Model):
     @property
     def e_importante(self):
         return "Sim" if self.important else "Não"
-
-    def class_logic(self):
-        return 'You can code logic here' 
