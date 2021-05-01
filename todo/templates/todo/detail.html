@@ -25,14 +25,16 @@
                 <!-- Excluir -->
                 <button type="submit" name="btndelete" id="btn-delete-{{ todo.id }}">Excluir</button>
                 <!-- Editar -->
-                <button type="submit" name="btnedit" id="btn-edit-{{ todo.id }}">Editar</button>
+                <button type="button" name="btnedit" id="btn-edit-{{ todo.id }}">Editar</button>
                 <!-- Concluir -->
                 <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">Concluir</button>
             </form>
         </div>
 
         <!-- Formulário editar todo -->
-        {% include 'todo/form.html' %}
+        <div id="div-edit-todo">
+            {% include 'todo/form.html' %}
+        </div>
 
     </div>
 

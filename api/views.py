@@ -56,11 +56,15 @@ class ToDoDetail(APIView):
 
     def put(self, request, pk, format=None):
         todo = self.get_object(pk)
-        serializer = ToDoSerializer(todo, data=request.data)
+        serializer = ToDoSerializer(todo, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk, format=None):
+        todo = self.get_object(pk)
+
 
     def delete(self, request, pk, format=None):
         todo = self.get_object(pk)

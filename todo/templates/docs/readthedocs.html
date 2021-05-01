@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <h1>Olá! Bem vindo e obrigado por utilizar nossa ToDo List!</h1>
+    <h1>EVOE's ToDo List</h1>
     <p>
         Essa documentação é o guia de uso da API. O código está disponível no 
         <a href="https://github.com/araleo/evoe-todos" target="_blank" id="link-github">GitHub</a>
@@ -30,7 +30,7 @@
         Para uso da API, primeiro é preciso criar uma conta 
         na <a href="/register" target="_blank">página de cadastro</a>
     </p>
-    
+
     
     <!-- Token -->
     <h2 id="titulo-token">Token</h2>
@@ -115,8 +115,9 @@
     <p>
         A requisição POST pode ser utilizada para cadastrar um novo ToDo.
         Para a criação de um novo ToDo é necessário apenas o texto da tarefa.
-        Dados opcionais podem ser vistos na seção ToDo abaixo.
+        Dados opcionais podem ser vistos na seção <a href="#titulo-todo">ToDo</a>.
     </p>
+    <p>Retorna 201 em caso de sucesso.</p>
     
     <div class="code-snippet">
         <p>cURL</p>
@@ -150,7 +151,8 @@
     <!-- ToDos GET -->
     <h4>GET</h4>
     <p>Retorna uma lista com todos os ToDos cadastrados pelo usuário portador do token.</p>
-    
+    <p>Retorna 200 em caso de sucesso.</p>
+
     <div class="code-snippet">
         <p>cURL</p>
         <pre>
@@ -187,6 +189,7 @@
     <!-- Detalhet GET -->
     <h4>GET</h4>
     <p>Retorna o ToDo com id requisitado</p>
+    <p>Retorna 200 em caso de sucesso.</p>
     
     <div class="code-snippet">
         <p>cURL</p>
@@ -220,6 +223,7 @@
     <h4>PUT</h4>
     <p>Altera o ToDo com id requisitado</p>
     <p>Os dados para alteração podem ser passados como json</p>
+    <p>Retorna 200 em caso de sucesso.</p>
     
     <div class="code-snippet">
         <p>cURL</p>
@@ -253,6 +257,7 @@
     <!-- Detalhe DELETE -->
     <h4>DELETE</h4>
     <p>Apaga o ToDo com id requisitado</p>
+    <p>Retorna 204 em caso de sucesso.</p>
     <p>
         Os ToDos não são efetivamente apagados do banco,
         e sim é preenchido o seu campo deleted_at.
@@ -260,7 +265,6 @@
         não aparecem na lista geral (/api/todo/), mas 
         podem ser acessados pelo endpoint de detalhe (/api/todo/id/)
     </p>
-    <p>Em caso de sucesso, essa requisição retorna o código 204.</p>
     
     <div class="code-snippet">
         <p>cURL</p>

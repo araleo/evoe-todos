@@ -66,4 +66,4 @@ class TestAPIViews(TestCase):
         self._login()
         new_todo = self.create_todo()
         response = self.client.get('http://127.0.0.1:8000/api/todos/', headers=self.headers)
-
+        self.assertEqual(response.status_code, 200)
