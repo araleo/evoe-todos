@@ -34,7 +34,7 @@ class ToDoViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        # filtra apenas os objetos criados pelo usuário que fez o request
+        # filtra apenas os objetos criados pelo usuário
         # e que não tenham o campo deleted_at preenchido
         _queryset = self.queryset.filter(user=self.request.user, deleted_at__isnull=True)
         return _queryset

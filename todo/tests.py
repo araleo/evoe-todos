@@ -20,7 +20,7 @@ class ToDoModelTests(TestCase):
         deleted_todo = ToDo(deleted_at=timezone.now())
         self.assertIs(deleted_todo.is_deleted, True)
 
-    def test_not_delete(self):
+    def test_not_deleted(self):
         not_delete_todo = ToDo(deleted_at=None)
         self.assertIs(not_delete_todo.is_deleted, False)
 

@@ -13,7 +13,7 @@ todo_list = api_views.ToDoViewSet.as_view({
 })
 
 urlpatterns = format_suffix_patterns([
-    path('', api_views.api_root),
+    path('', api_views.api_root, name='root'),
     path('todos/', todo_list, name='todo-list'),
     path('todos/<int:pk>/', api_views.ToDoDetail.as_view(), name='todo-detail'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
