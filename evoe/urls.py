@@ -16,5 +16,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
 
     # app
-    path('todo/', include('todo.urls')),
+    path('', include('todo.urls'), name='todo'),
 ]

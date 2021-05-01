@@ -1,6 +1,9 @@
 {% extends 'todo/layout.html' %}
 
 {% block content %}
+
+    {% include 'todo/topbar.html' %}
+
     <h1 id="main-title">{{ user.username }}'s ToDos</h1>
 
     <div class="home-content">

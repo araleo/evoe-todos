@@ -130,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Other project configs
 
-LOGIN_REDIRECT_URL = '/todo/'
+LOGIN_REDIRECT_URL = '/'
 
 
 # Import local settings if they exist

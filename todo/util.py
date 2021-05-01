@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils import timezone
 
 from .forms import ToDoForm
@@ -29,8 +30,8 @@ def redirect_after_post(request, todo_id=None):
     # e se o post não foi recebido do form de deletar
     # do contrário retorna para a lista de todos
     if todo_id and 'btndelete' not in request.POST:
-        return HttpResponseRedirect(f'/todo/{todo_id}')
-    return HttpResponseRedirect('/todo')
+        return HttpResponseRedirect(reverse('todo:detail', args=(todo_id,)))
+    return HttpResponseRedirect(reverse('todo:index'))
 
 
 def get_obj(request, pk):
@@ -39,8 +40,9 @@ def get_obj(request, pk):
 
 def complete_todo(request):
     todo = get_obj(request, request.POST['todo_pk'])
-    todo.completed_at = timezone.now()
-    todo.save()
+    if not todo.completed_at:
+        todo.completed_at = timezone.now()
+        todo.save()
 
 
 def delete_todo(request):

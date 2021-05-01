@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.urls import reverse
 
 from .forms import ToDoForm
 from .models import ToDo
@@ -39,7 +40,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect('/todo')
+        return HttpResponseRedirect(reverse('todo:index'))
 
     form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

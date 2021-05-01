@@ -2,7 +2,7 @@
  
 {% block content %}
 
-    <a href="{% url 'todo:index' %}">Home</a>
+    {% include 'todo/topbar.html' %}
 
     <div class="detail-content">
 
@@ -27,7 +27,12 @@
                 <!-- Editar -->
                 <button type="button" name="btnedit" id="btn-edit-{{ todo.id }}">Editar</button>
                 <!-- Concluir -->
-                <button type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}">Concluir</button>
+                <button 
+                    type="submit" name="btncomplete" id="btn-complete-{{ todo.id }}"
+                    {% if todo.is_completed %} style="display: none;" {% endif %}
+                >
+                    Concluir
+                </button>
             </form>
         </div>
 

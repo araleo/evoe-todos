@@ -1,0 +1,9 @@
+<div class="barra-topo">
+    <a href="https://github.com/araleo/evoe-todos" target="_blank">GitHub</a>
+    {% if todo.todo %}
+        <a href="{% url 'todo:index' %}">Home</a>
+    {% else %}
+        <a href="{% url 'todo:docs' %}" target="_blank">API</a>
+    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a>
+</div>

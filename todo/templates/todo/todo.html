@@ -3,19 +3,23 @@
     <div class="upper-todo-div">
 
         <!-- botao excluir todo -->
-        <form class="" action="" method="post">
+        <form id="btn-delete-todo-home" action="" method="post">
             {% csrf_token %}
             <input type="hidden" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
             <button type="submit" name="btndelete" id="btn-delete-{{ todo.id }}">Excluir</button>
         </form>
 
         <!-- todo -->
-        {% if todo.important %} <b> {% endif %}
-        <p>{{ todo.todo }}</p>
-        {% if todo.important %} </b> {% endif %}
+        <div id="div-p-todo">
+            <p id="p-todo-home">
+                {% if todo.important %} <b> {% endif %}
+                    {{ todo.todo }}
+                {% if todo.important %} </b> {% endif %}
+            </p>
+        </div>
 
         <!-- botao concluir todo -->
-        <form class="" action="" method="post">
+        <form id="btn-complete-todo-home" action="" method="post">
             {% csrf_token %}
             <input type="hidden" name="todo_pk" class="hidden-input" value="{{ todo.id }}">
             <button 
