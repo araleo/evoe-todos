@@ -7,6 +7,16 @@ from .forms import ToDoForm
 from .models import ToDo
 
 
+def redirect_after_post(request, todo_id=None):
+    # retorna um redirecionamento para a pagina
+    # de detalhe se houver um todo_id no request
+    # e se o post não foi recebido do form de deletar
+    # do contrário redireciona para a lista de todos
+    if todo_id and 'btndelete' not in request.POST:
+        return HttpResponseRedirect(reverse('todo:detail', args=(todo_id,)))
+    return HttpResponseRedirect(reverse('todo:index'))
+
+
 def handle_todo(request, todo_id=None):
     # completar todo
     if 'btncomplete' in request.POST:
@@ -22,16 +32,6 @@ def handle_todo(request, todo_id=None):
             update_todo(request, todo_id)
         else:
             create_todo(request)
-
-
-def redirect_after_post(request, todo_id=None):
-    # retorna um redirecionamento para a pagina
-    # de detalhe se houver um todo_id no request
-    # e se o post não foi recebido do form de deletar
-    # do contrário retorna para a lista de todos
-    if todo_id and 'btndelete' not in request.POST:
-        return HttpResponseRedirect(reverse('todo:detail', args=(todo_id,)))
-    return HttpResponseRedirect(reverse('todo:index'))
 
 
 def get_obj(request, pk):

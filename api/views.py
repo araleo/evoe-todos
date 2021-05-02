@@ -65,7 +65,6 @@ class ToDoDetail(APIView):
     def patch(self, request, pk, format=None):
         todo = self.get_object(pk)
 
-
     def delete(self, request, pk, format=None):
         todo = self.get_object(pk)
         todo.deleted_at = timezone.now()
