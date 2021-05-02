@@ -3,9 +3,6 @@
 *.pyc
 __pycache__/
 local_settings.py
-db.sqlite3
-sqlite3
-staticfiles
 .vscode
 .venv
 # Elastic Beanstalk Files
