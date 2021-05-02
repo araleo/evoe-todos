@@ -20,8 +20,12 @@ Para rodar uma versão local do projeto:
 
 * git clone
 * pip install -r requirements.txt
+    * em sistemas linux pode ser necessário instalar a biblioteca linux libpq como dependência da python biblioteca psycopg2. 
+    * sudo apt-get install libpq-dev
+    * isso só será necessário para utilizar o postgres como banco de dados, caso pretenda utilizar apenas a instalação local com sqlite, é possível remover a dependência psycopg2 do arquivo requirements.txt e não instalar a libpq.
 * configurar uma variável de ambiente EVOE_KEY como chave de segurança do Django.
-* no arquivo settings.py, no dicionário DATABASES, descomentar as linhas referentes ao banco sqlite e comentar as linhas referentes ao banco PostgreSQL.
+* no arquivo evoe/settings.py, no dicionário DATABASES, descomentar as linhas referentes ao banco sqlite e comentar as linhas referentes ao banco PostgreSQL.
+* na pasta evoe criar um arquivo com nome local_settings.py e conteúdo: DEBUG = True
 * python manage.py makemigrations
 * python manage.py migrate --run-syncdb
 * python manage.py createsuperuser
