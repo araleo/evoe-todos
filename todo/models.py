@@ -4,7 +4,7 @@ from django.db import models
 
 class ToDo(models.Model):
     todo = models.CharField(max_length=100)
-    description = models.CharField(max_length=250, null=True, blank=True)
+    description = models.CharField(max_length=300, null=True, blank=True)
     important = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='todos')
     created_at = models.DateTimeField(auto_now_add=True)
