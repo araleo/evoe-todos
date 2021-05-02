@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	vertical-align: baseline;
+}
+
+body {
+    width: 98%;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 2em;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 1.5em;
+}
+
+h3 {
+    margin-top: 3em;
+    margin-left: 3em;
+}
+
+h4 {
+    margin-top: 1em;
+}
+
+p {
+    margin-top: .75em;
+}
+
+.code-snippet {
+    width: 70%;
+    margin: .5em auto;
+    padding: .5em;
+    border: 1px solid black;
+    overflow: scroll;
+}
+
+ul li {
+    margin: .75em 3em;
+}
