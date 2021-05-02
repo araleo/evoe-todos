@@ -58,10 +58,10 @@ Para rodar uma versão local do projeto:
 
 Algumas escolhas foram tomadas com o intuito de manter a simplicidade do projeto, como:
 
-* um perfil extremamente simplificado, apenas com nome de usuário e senha.
-* ausência de um processo de reset de senha.
-* ausência de validação da forma da senha (número de caracteres, maiúsculas e minúsculas, etc).
-* uso do sistema e das páginas de autenticação padronizados do Django.
+* Um perfil extremamente simplificado, apenas com nome de usuário e senha.
+* Ausência de um processo de reset de senha.
+* Ausência de validação da forma da senha (número de caracteres, maiúsculas e minúsculas, etc).
+* Uso do sistema e das páginas de autenticação padronizados do Django.
 
 ### Pontos de melhoria
 

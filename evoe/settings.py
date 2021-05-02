@@ -11,7 +11,7 @@ SECRET_KEY = os.environ['EVOE_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['todo-evoe.eba-bhazvxtk.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
