@@ -72,8 +72,8 @@ DATABASES = {
         'NAME': 'evoe',
         'USER': os.environ.get('EVOE_DB_USER'),
         'PASSWORD': os.environ.get('EVOE_DB_PASS'),
-        'HOST': 'localhost',
-        'PORT': 5433,
+        'HOST': os.environ.get('EVOE_DB_HOST'),
+        'PORT': 5432,
     }
 }
 
