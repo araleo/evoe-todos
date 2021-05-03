@@ -26,6 +26,12 @@
         <a href="#titulo-todo">ToDo</a>
     </p>
     
+    <p>
+        Se estiver rodando uma versão local da API, substituir
+        http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/
+        por http://127.0.0.1:8000/ nas urls abaixo.
+    </p>
+
     <!-- Registro -->
     <h2 id="titulo-registro">Registro</h2>
     <p>
@@ -38,7 +44,7 @@
     <h2 id="titulo-token">Token</h2>
     <p>
         Depois de criar um login e uma senha, é preciso gerar um token para acessar a API. 
-        Para isso, basta enviar um POST para http://127.0.0.1:8000/api/api-token-auth/ 
+        Para isso, basta enviar um POST para http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/api-token-auth/ 
         com  o usuário e a senha criados. A resposta conterá o token de acesso dessa conta.
     </p>
     
@@ -46,7 +52,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X POST -d "username=teste&password=teste" http://127.0.0.1:8000/api/api-token-auth/
+                $ curl -X POST -d "username=teste&password=teste" http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/api-token-auth/
             </code>
             <samp>
                 {"token":"bac692809c899a183af81031d38b8208da0d732a"}
@@ -59,7 +65,7 @@
         <pre>
             <code>
                 >>> import requests
-                >>> res = requests.post('http://127.0.0.1:8000/api/api-token-auth/', data={'username': 'teste', 'password': 'teste'})
+                >>> res = requests.post('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/api-token-auth/', data={'username': 'teste', 'password': 'teste'})
                 >>> res.text
             </code>
             <samp>
@@ -75,7 +81,7 @@
     <!-- Root -->
     <h3>api/</h3>
     <p>Requisições permitidas: GET</p>
-    <p>Ponto de acesso: http://127.0.0.1:8000/api/</p>
+    <p>Ponto de acesso: http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/</p>
     <p>Retorna as urls das endpoints da api.</p>
     <p>Esse é o único endpoint que pode ser acessado sem um Token.</p>
     
@@ -83,10 +89,10 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X GET http://127.0.0.1:8000/api/
+                $ curl -X GET http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/
             </code>
             <samp>
-                {"todos":"http://127.0.0.1:8000/api/todos/"}
+                {"todos":"http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/"}
             </samp>
         </pre>
     </div>
@@ -96,11 +102,11 @@
         <pre>
             <code>
                 >>> import requests
-                >>> res = requests.get('http://127.0.0.1:8000/api/')
+                >>> res = requests.get('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/')
                 >>> res.text
             </code>
             <samp>
-                '{"todos":"http://127.0.0.1:8000/api/todos/"}'
+                '{"todos":"http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/"}'
             </samp>
         </pre>
     </div>
@@ -109,7 +115,7 @@
     <!-- Todos -->
     <h3>api/todos/</h3>
     <p>Requisições permitidas: GET e POST</p>
-    <p>Ponto de acesso: http://127.0.0.1:8000/api/todos/</p>
+    <p>Ponto de acesso: http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/</p>
     
     
     <!-- ToDos POST -->
@@ -125,7 +131,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X POST http://127.0.0.1:8000/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "teste"}'
+                $ curl -X POST http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "teste"}'
             </code>
             <samp>
                 {"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}
@@ -140,7 +146,7 @@
                 >>> import requests
                 >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
                 >>> data = {'todo': 'teste6'}
-                >>> res = requests.post('http://127.0.0.1:8000/api/todos/', headers=headers, data=data)
+                >>> res = requests.post('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/', headers=headers, data=data)
                 >>> res.text
             </code>
             <samp>
@@ -159,7 +165,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X GET http://127.0.0.1:8000/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+                $ curl -X GET http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
             </code>
             <samp>
                 {"count":2,"next":null,"previous":null,"results":[{"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null},{"id":42,"todo":"teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:23:02.831639-03:00","completed_at":null,"deleted_at":null}]}
@@ -173,7 +179,7 @@
             <code>
                 >>> import requests
                 >>> headers={'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
-                >>> res = requests.get('http://127.0.0.1:8000/api/todos/', headers=headers)
+                >>> res = requests.get('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/', headers=headers)
                 >>> res.text
             </code>
             <samp>
@@ -186,7 +192,7 @@
     <!-- ToDo Detalhe -->
     <h3>api/todos/(id)</h3>
     <p>Requisições permitidas: GET, PUT, DELETE</p>
-    <p>Ponto de acesso: http://127.0.0.1:8000/api/todos/(to_id)</p>
+    <p>Ponto de acesso: http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/(to_id)</p>
     
     <!-- Detalhet GET -->
     <h4>GET</h4>
@@ -197,7 +203,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X GET http://127.0.0.1:8000/api/todos/43/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+                $ curl -X GET http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/43/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
             </code>
             <samp>
                 {"id":43,"todo":"teste 2","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:24:00.716299-03:00","last_modified_at":"2021-04-30T17:24:00.716328-03:00","completed_at":null,"deleted_at":null}
@@ -211,7 +217,7 @@
             <code>
                 >>> import requests
                 >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
-                >>> res = requests.get('http://127.0.0.1:8000/api/todos/42/', headers=headers)
+                >>> res = requests.get('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/42/', headers=headers)
                 >>> res.text
             </code>
             <samp>
@@ -231,7 +237,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X PUT http://127.0.0.1:8000/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "Teste"}'
+                $ curl -X PUT http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a' -H 'Content-Type: application/json' -d '{"todo": "Teste"}'
             </code>
             <samp>
                 {"id":42,"todo":"Teste","description":null,"important":false,"user":"teste","created_at":"2021-04-30T17:23:02.831601-03:00","last_modified_at":"2021-04-30T17:28:07.757992-03:00","completed_at":null,"deleted_at":null}
@@ -246,7 +252,7 @@
                 >>> import requests
                 >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
                 >>> data = {'todo': 'Teste!'}
-                >>> res = requests.put('http://127.0.0.1:8000/api/todos/43/', headers=headers, data=data)
+                >>> res = requests.put('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/43/', headers=headers, data=data)
                 >>> res.text
             </code>
             <samp>
@@ -272,7 +278,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X DELETE http://127.0.0.1:8000/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+                $ curl -X DELETE http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/42/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
             </code>
         </pre>
     </div>
@@ -283,7 +289,7 @@
             <code>
                 >>> import requests
                 >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
-                >>> res = requests.delete('http://127.0.0.1:8000/api/todos/43/', headers=headers)
+                >>> res = requests.delete('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/43/', headers=headers)
                 >>> res.status_code
             </code>
             <samp>
@@ -306,7 +312,7 @@
             <code>
                 >>> import requests
                 >>> headers = {'Authorization': 'Token bac692809c899a183af81031d38b8208da0d732a'}
-                >>> res = requests.get('http://127.0.0.1:8000/api/todos/33/', headers=headers)
+                >>> res = requests.get('http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/33/', headers=headers)
                 >>> print(res, res.text)
             </code>
             <samp>
@@ -319,7 +325,7 @@
         <p>cURL</p>
         <pre>
             <code>
-                $ curl -X DELETE http://127.0.0.1:8000/api/todos/33/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
+                $ curl -X DELETE http://todo.eba-f4dqfau6.us-east-2.elasticbeanstalk.com/api/todos/33/ -H 'Authorization: Token bac692809c899a183af81031d38b8208da0d732a'
             </code>
             <samp>
                 {"detail":"Você não tem permissão para executar essa ação."}
