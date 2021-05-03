@@ -31,7 +31,7 @@ Para rodar uma versão local do projeto (é recomendável utilizar uma venv):
 * na pasta evoe (onde está o arquivo settings.py) criar um arquivo com nome local_settings.py e conteúdo:
 
     DEBUG = True
-
+    
     ALLOWED_HOSTS = []
 
 * python manage.py makemigrations
@@ -67,6 +67,15 @@ Para rodar uma versão local do projeto (é recomendável utilizar uma venv):
         * docs: templates da documentação da api
         * registration: templates das páginas de registro, login e logout
         * todo: templates do serviço web 
+
+
+### Testes
+
+Para executar os testes, navegar até o diretório evoe-todos (que contém o arquivo manage.py) e executar
+
+    python manage.py test todo
+    python manage.py test api
+
 
 ### Escolhas
 

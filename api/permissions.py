@@ -3,8 +3,8 @@ from rest_framework import permissions
 
 class IsOwnerOnly(permissions.BasePermission):
     """
-    Custom permission to allow only the owner of an
-    object to interact with it (view, edit and delete).
+    Permissão personalizada para que apenas o 
+    proprietário de um objeto possa interagir
     """
 
     def has_permission(self, request, view):

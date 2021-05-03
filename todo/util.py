@@ -46,6 +46,8 @@ def complete_todo(request):
 
 
 def delete_todo(request):
+    # não deleta o ToDo do banco, apenas
+    # preenche o campo deleted_at
     todo = get_obj(request, request.POST['todo_pk'])
     todo.deleted_at = timezone.now()
     todo.save()
