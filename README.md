@@ -42,7 +42,7 @@ Para rodar uma versão local do projeto (é recomendável utilizar uma venv):
 
 #### Troubleshooting versão local
 
-* Caso ao tentar rodar o Django acuse que determinada tabela não existe no banco de dados, executar:
+* Caso o Django acuse que determinada tabela não existe no banco de dados, executar:
     * python manage.py migrate --run-syncdb
 
 
