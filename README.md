@@ -29,7 +29,12 @@ Para rodar uma versão local do projeto:
     * em distribuições ubuntu: sudo apt-get install libpq-dev
     * isso só será necessário para utilizar o postgres como banco de dados, caso pretenda utilizar apenas a instalação local com sqlite, é possível remover a dependência psycopg2 do arquivo requirements.txt e não instalar a libpq.
 * configurar uma variável de ambiente EVOE_KEY como chave de segurança do Django.
-* na pasta evoe criar um arquivo com nome local_settings.py e conteúdo: DEBUG = True
+* na pasta evoe (onde está o arquivo settings.py) criar um arquivo com nome local_settings.py e conteúdo:
+
+    DEBUG = True
+
+    ALLOWED_HOSTS = []
+
 * python manage.py makemigrations
 * python manage.py migrate
 * python manage.py createsuperuser
