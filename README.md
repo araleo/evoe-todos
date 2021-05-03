@@ -20,10 +20,9 @@ Os serviços estão hospedados no Elastic Beanstalk da AWS, utilizando como banc
 
 ### Versão local
 
-Para rodar uma versão local do projeto:
+Para rodar uma versão local do projeto (é recomendável utilizar uma venv):
 
 * git clone
-* (é recomendável utilizar uma venv)
 * pip install -r requirements.txt
     * em sistemas linux pode ser necessário instalar a biblioteca linux libpq como dependência da python biblioteca psycopg2. 
     * em distribuições ubuntu: sudo apt-get install libpq-dev
